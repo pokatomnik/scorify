@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:core';
+
+import './Storage/ScoreTable.dart';
+import './Storage/RecentValue.dart';
 
 typedef void SetValue(int value);
 
@@ -8,11 +12,24 @@ typedef Widget StateControl(int value, SetValue setValue);
 class RouteHomeState extends State<RouteHome> {
   static final _defaultValues = [10, 20, 50, 100, 300];
 
+  ScoreTable _scoreTable = ScoreTable();
+
+  RecentValue _recentValue = RecentValue(0);
+
   TextEditingController _textEditingController = TextEditingController(text: '150');
 
   List<int> _values = _defaultValues;
 
-  int _total = 0;
+  int _totalValue = 0;
+
+  set _total(int value) {
+    _recentValue.set(value);
+    _totalValue = value;
+  }
+
+  int get _total {
+    return _totalValue;
+  }
 
   _increment(int value) {
     setState(() {
@@ -21,9 +38,12 @@ class RouteHomeState extends State<RouteHome> {
   }
 
   _reset() {
+    final total = _total;
     setState(() {
       _total = 0;
     });
+
+    _scoreTable.saveResult(total);
   }
 
   _incrementWithCustom() {
@@ -59,9 +79,7 @@ class RouteHomeState extends State<RouteHome> {
   }
 
   @override
-  initState() {
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -96,12 +114,12 @@ class RouteHomeState extends State<RouteHome> {
                         Text('$_total')
                       ],
                     ),
-                    Row(
+                    Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CupertinoButton(
                             child: Text(
-                              'Сбросить',
+                              'Сбросить / Cохранить',
                               style: TextStyle(fontSize: 24)
                             ),
                             onPressed: _reset,
@@ -148,6 +166,16 @@ class RouteHomeState extends State<RouteHome> {
             )
         )
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this._recentValue.get().then((recentValue) {
+      setState(() {
+        _total = recentValue;
+      });
+    });
   }
 }
 
