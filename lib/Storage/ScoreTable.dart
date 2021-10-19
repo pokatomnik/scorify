@@ -1,4 +1,4 @@
-import 'IntStorage.dart';
+import 'package:scorify_app/Storage/IntStorage.dart';
 
 
 class ScoreTable {

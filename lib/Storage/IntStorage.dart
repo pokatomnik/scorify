@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'ScopedAsyncPreferences.dart';
+import 'package:scorify_app/Storage/ScopedAsyncPreferences.dart';
 
 class IntStorage extends ScopedAsyncPreferences<int> {
   IntStorage(String scope, String sep) : super(scope, sep);

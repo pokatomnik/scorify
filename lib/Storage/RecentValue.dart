@@ -1,4 +1,4 @@
-import './IntStorage.dart';
+import 'package:scorify_app/Storage/IntStorage.dart';
 
 class RecentValue {
   static const _KEY = 'value';

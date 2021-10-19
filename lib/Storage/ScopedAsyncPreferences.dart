@@ -1,4 +1,4 @@
-import 'AsyncPreferences.dart';
+import 'package:scorify_app/Storage/AsyncPreferences.dart';
 
 abstract class ScopedAsyncPreferences<T> extends AsyncPreferences<T> {
   final String _scope;
