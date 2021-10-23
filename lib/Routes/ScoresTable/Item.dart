@@ -28,11 +28,11 @@ class Item {
 
   Item(this._date, this.score);
 
-  getDate() {
+  DateTime getDate() {
     return _date;
   }
 
-  formatDate() {
+  String formatDate() {
     final year = _date.year;
     final month = _date.month;
     final day = _date.day;

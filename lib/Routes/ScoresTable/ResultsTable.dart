@@ -46,6 +46,7 @@ class ResultsTable extends StatelessWidget {
           ),
           ...mapIndexed<Item, TableRow>(_table, (item, index) {
             return TableRow(
+              key: ValueKey(item.getDate().toIso8601String()),
               decoration: index % 2 > 0 ? BoxDecoration(
                   color: Color.fromRGBO(198, 198, 198, 0.3)
               ) : null,
