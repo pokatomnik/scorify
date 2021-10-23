@@ -13,7 +13,6 @@ import 'package:scorify_app/App.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // temporary disable tests
-    return;
     // Build our app and trigger a frame.
     await tester.pumpWidget(App());
 
