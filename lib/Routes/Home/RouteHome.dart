@@ -6,6 +6,7 @@ import 'dart:core';
 import 'package:scorify_app/Storage/ScoreTable.dart';
 import 'package:scorify_app/Storage/RecentValue.dart';
 import 'package:scorify_app/Common/Dialog/scorifyAlert.dart';
+import 'package:scorify_app/UI/BottomBarNav.dart';
 
 typedef void SetValue(int value);
 
@@ -14,13 +15,13 @@ typedef Widget StateControl(int value, SetValue setValue);
 class RouteHomeState extends State<RouteHome> {
   static const _defaultValues = [10, 20, 50, 100, 300];
 
-  ScoreTable _scoreTable = ScoreTable();
+  final ScoreTable _scoreTable = ScoreTable();
 
-  RecentValue _recentValue = RecentValue(0);
+  final RecentValue _recentValue = RecentValue(0);
 
-  TextEditingController _textEditingController = TextEditingController(text: '150');
+  final TextEditingController _textEditingController = TextEditingController(text: '150');
 
-  List<int> _values = _defaultValues;
+  final List<int> _values = List.from(_defaultValues);
 
   int _totalValue = 0;
 
@@ -69,13 +70,11 @@ class RouteHomeState extends State<RouteHome> {
     }
   }
 
-  @override
-
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
+    return Scaffold(
+        appBar: CupertinoNavigationBar(
           middle: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -83,10 +82,10 @@ class RouteHomeState extends State<RouteHome> {
             ],
           ),
         ),
-        child: Center(
+        body: Center(
             child: SingleChildScrollView(
               child: Container(
-                margin: const EdgeInsets.only(top: 80, bottom: 80),
+                padding: const EdgeInsets.only(top: 40, bottom: 40),
                 child: HomeContent(
                   total: _total,
                   reset: _reset,
@@ -97,7 +96,12 @@ class RouteHomeState extends State<RouteHome> {
                 )
               )
             )
-        )
+        ),
+        bottomNavigationBar: BottomBarNav(
+          onScoresPress: () {
+            Navigator.pushNamed(context, '/scores');
+          },
+        ),
     );
   }
 
