@@ -51,15 +51,15 @@ class HomeContent extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('$_total')
+            Text(_total.toString(), style: TextStyle(fontSize: 36.0))
           ],
         ),
         Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CupertinoButton(
-                child: Text(
-                    'Сбросить / Cохранить',
+                child: const Text(
+                    'Cохранить',
                     style: TextStyle(fontSize: 24)
                 ),
                 onPressed: _reset,
@@ -85,21 +85,38 @@ class HomeContent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 300,
+                width: 150,
                 child: CupertinoTextField(
+                  decoration: CupertinoTextField().decoration?.copyWith(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5.0),
+                      bottomLeft: Radius.circular(5.0),
+                      topRight: Radius.zero,
+                      bottomRight: Radius.zero,
+                    ),
+                  ),
                   controller: _textEditingController,
                 ),
-              )
-            ]),
-        Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CupertinoButton(
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(40, 40)
+                ).copyWith(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.zero,
+                        bottomLeft: Radius.zero,
+                        topRight: Radius.circular(5.0),
+                        bottomRight: Radius.circular(5.0),
+                      ),
+                    )
+                  )
+                ),
                 child: Text('Добавить'),
                 onPressed: _incrementWithCustom,
               )
-            ]
-        )
+            ]),
       ],
     );
   }
