@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scorify_app/Routes/ScoresTable/Item.dart';
 
@@ -6,12 +7,24 @@ import 'package:scorify_app/Routes/ScoresTable/MapIndexed.dart';
 class ResultsTable extends StatelessWidget {
   final Iterable<Item> _table;
 
-  ResultsTable(this._table);
+  final Function(Item) _onRemoveItem;
+
+  ResultsTable({
+    required Iterable<Item> table,
+    required void onRemoveItem(Item item)
+  }):
+    this._table = table,
+    this._onRemoveItem = onRemoveItem;
 
   Widget build(BuildContext context) {
     return Table(
         border: TableBorder.all(width: 1.0, color: Colors.black12),
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+        columnWidths: const {
+          0: FlexColumnWidth(2),
+          1: FlexColumnWidth(2),
+          3: FixedColumnWidth(1)
+        },
         children: [
           TableRow(
               decoration: BoxDecoration(
@@ -41,6 +54,18 @@ class ResultsTable extends StatelessWidget {
                         )
                       ),
                     )
+                ),
+                TableCell(
+                  child: Container(
+                    padding: EdgeInsets.only(top: 5, bottom: 5),
+                    child: Text(
+                      '',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold
+                      )
+                    ),
+                  )
                 )
               ]
           ),
@@ -64,9 +89,21 @@ class ResultsTable extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.only(top: 5, bottom: 5),
                     child: Text(
-                      // TODO format this
                       item.score.toString(),
                       textAlign: TextAlign.center
+                    ),
+                  )
+                ),
+                TableCell(
+                  child: Container(
+                    padding: EdgeInsets.only(top: 5, bottom: 5),
+                    child: CupertinoButton(
+                      child: const Text(
+                        'Удалить',
+                      ),
+                      onPressed: () {
+                        _onRemoveItem(item);
+                      },
                     ),
                   )
                 )

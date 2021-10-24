@@ -28,6 +28,10 @@ abstract class AsyncPreferences<T> {
     saveToPrefs(await _sharedPreferences, key, value);
   }
 
+  Future<void> removeValue(String key) async {
+    (await _sharedPreferences).remove(key);
+  }
+
   Future<Set<String>> getAllKeys() async {
     return (await _sharedPreferences).getKeys();
   }

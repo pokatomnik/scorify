@@ -39,6 +39,11 @@ abstract class ScopedAsyncPreferences<T> extends AsyncPreferences<T> {
   }
 
   @override
+  Future<void> removeValue(String key) async {
+    return super.removeValue(_toScopeKey(key));
+  }
+
+  @override
   Future<Set<String>> getAllKeys() async {
     final allKeys = await super.getAllKeys();
     return allKeys.fold<Set<String>>(Set(), (keys, currentKey) {

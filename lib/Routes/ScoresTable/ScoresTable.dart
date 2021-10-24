@@ -18,16 +18,29 @@ class ScoresTableState extends State {
 
   List<Item> _table = [];
 
+  Future<void> _onRemoveItem(Item item) async {
+    await _scoreTable.removeResult(item.getDate().toIso8601String());
+    final scores = await _getScores();
+    setState(() {
+      _table = scores;
+    });
+  }
+
+  Future<List<Item>> _getScores() async {
+    final scores = await _scoreTable.getAllResults();
+    final results = scores.entries.map((entry) {
+      return Item(DateTime.parse(entry.key), entry.value);
+    }).toList(growable: false);
+    results.sort((a, b) {
+      return b.getDate().compareTo(a.getDate());
+    });
+    return results;
+  }
+
   @override
   void initState() {
     super.initState();
-    _scoreTable.getAllResults().then((scores) {
-      final results = scores.entries.map((entry) {
-        return Item(DateTime.parse(entry.key), entry.value);
-      }).toList(growable: false);
-      results.sort((a, b) {
-        return b.getDate().compareTo(a.getDate());
-      });
+    _getScores().then((results) {
       setState(() {
         _table = results;
       });
@@ -53,7 +66,10 @@ class ScoresTableState extends State {
             left: 40,
             right: 40
           ),
-          child: ResultsTable(_table)
+          child: ResultsTable(
+            table: _table,
+            onRemoveItem: _onRemoveItem,
+          )
         )
       ),
       bottomNavigationBar: BottomBarNav(
