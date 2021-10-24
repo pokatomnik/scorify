@@ -1,6 +1,5 @@
 import 'package:scorify_app/Storage/IntStorage.dart';
 
-
 class ScoreTable {
   final IntStorage _intStorage = IntStorage('SCORE_TABLE', '|');
 

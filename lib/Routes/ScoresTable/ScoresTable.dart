@@ -66,7 +66,9 @@ class ScoresTableState extends State {
             left: 40,
             right: 40
           ),
-          child: ResultsTable(
+          child: _table.length == 0 ? Center(
+            child: Text('Пока что нет ни одного результата:)'),
+          ) : ResultsTable(
             table: _table,
             onRemoveItem: _onRemoveItem,
           )
