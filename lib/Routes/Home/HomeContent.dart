@@ -86,6 +86,7 @@ class HomeContent extends StatelessWidget {
             children: [
               SizedBox(
                 width: 150,
+                height: 32,
                 child: CupertinoTextField(
                   decoration: CupertinoTextField().decoration?.copyWith(
                     borderRadius: BorderRadius.only(
@@ -98,24 +99,26 @@ class HomeContent extends StatelessWidget {
                   controller: _textEditingController,
                 ),
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(40, 40)
-                ).copyWith(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.zero,
-                        bottomLeft: Radius.zero,
-                        topRight: Radius.circular(5.0),
-                        bottomRight: Radius.circular(5.0),
-                      ),
-                    )
-                  )
+              SizedBox(
+                height: 32,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom().copyWith(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.zero,
+                              bottomLeft: Radius.zero,
+                              topRight: Radius.circular(5.0),
+                              bottomRight: Radius.circular(5.0),
+                            ),
+                          )
+                      )
+                  ),
+                  child: Text('Добавить'),
+                  onPressed: _incrementWithCustom,
                 ),
-                child: Text('Добавить'),
-                onPressed: _incrementWithCustom,
               )
+
             ]),
       ],
     );

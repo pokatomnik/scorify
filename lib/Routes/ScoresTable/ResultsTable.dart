@@ -20,11 +20,6 @@ class ResultsTable extends StatelessWidget {
     return Table(
         border: TableBorder.all(width: 1.0, color: Colors.black12),
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-        columnWidths: const {
-          0: FlexColumnWidth(2),
-          1: FlexColumnWidth(2),
-          3: FixedColumnWidth(1)
-        },
         children: [
           TableRow(
               decoration: BoxDecoration(
@@ -59,7 +54,7 @@ class ResultsTable extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.only(top: 5, bottom: 5),
                     child: Text(
-                      '',
+                      ' ',
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold
@@ -100,6 +95,8 @@ class ResultsTable extends StatelessWidget {
                     child: CupertinoButton(
                       child: const Text(
                         'Удалить',
+                        softWrap: false,
+
                       ),
                       onPressed: () {
                         _onRemoveItem(item);
