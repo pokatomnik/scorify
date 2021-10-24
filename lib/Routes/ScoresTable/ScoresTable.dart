@@ -25,6 +25,9 @@ class ScoresTableState extends State {
       final results = scores.entries.map((entry) {
         return Item(DateTime.parse(entry.key), entry.value);
       }).toList(growable: false);
+      results.sort((a, b) {
+        return b.getDate().compareTo(a.getDate());
+      });
       setState(() {
         _table = results;
       });
@@ -38,7 +41,7 @@ class ScoresTableState extends State {
         middle: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Scorify')
+            Text('Таблица результатов')
           ],
         ),
       ),
@@ -47,8 +50,8 @@ class ScoresTableState extends State {
           padding: const EdgeInsets.only(
             top: 40,
             bottom: 40,
-            left: 80,
-            right: 80
+            left: 40,
+            right: 40
           ),
           child: ResultsTable(_table)
         )

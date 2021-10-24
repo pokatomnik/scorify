@@ -55,7 +55,6 @@ class ResultsTable extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.only(top: 5, bottom: 5),
                     child: Text(
-                      // TODO format this
                       item.formatDate(),
                       textAlign: TextAlign.center,
                     ),
